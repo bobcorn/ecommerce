@@ -1,0 +1,10 @@
+version: '3'
+services:
+  build-service:
+    image: library/gradle:6.8.3-jdk11
+    hostname: build-service
+    container_name: build-service
+    volumes:
+      - .:/home/gradle/project
+    working_dir: /home/gradle/project
+    command: gradle bootJar

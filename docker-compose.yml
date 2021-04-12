@@ -1,0 +1,122 @@
+version: '3'
+
+services:
+
+  mongo:
+    image: mongo
+    hostname: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.1.0
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-server:6.1.1
+    hostname: broker
+    container_name: broker
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://broker:9092
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: localhost
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:29092
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+
+  catalog-service:
+    image: openjdk:11
+    depends_on:
+      - mongo
+      - broker
+      - zookeeper
+    hostname: catalog-service
+    container_name: catalog-service
+    volumes:
+      - ./catalog-service/build/libs:/usr/src/service
+    working_dir: /usr/src/service
+    command: java -jar catalog-service-0.0.1-SNAPSHOT.jar --spring.profiles.active=docker -Xmx300m
+    ports:
+      - 8181:8181
+    deploy:
+      resources:
+        limits:
+          cpus: 0.50
+          memory: 512M
+      
+  order-service:
+    image: openjdk:11
+    depends_on:
+      - catalog-service
+    hostname: order-service
+    container_name: order-service
+    volumes:
+      - ./order-service/build/libs:/usr/src/service
+    working_dir: /usr/src/service
+    command: java -jar order-service-0.0.1-SNAPSHOT.jar --spring.profiles.active=docker -Xmx300m
+    ports:
+      - 8182:8182
+    deploy:
+      resources:
+        limits:
+          cpus: 0.50
+          memory: 512M
+
+  wallet-service:
+    image: openjdk:11
+    depends_on:
+      - catalog-service
+    hostname: wallet-service
+    container_name: wallet-service
+    volumes:
+      - ./wallet-service/build/libs:/usr/src/service
+    working_dir: /usr/src/service
+    command: java -jar wallet-service-0.0.1-SNAPSHOT.jar --spring.profiles.active=docker -Xmx300m
+    ports:
+      - 8183:8183
+    deploy:
+      resources:
+        limits:
+          cpus: 0.50
+          memory: 512M
+
+  warehouse-service:
+    image: openjdk:11
+    depends_on:
+      - catalog-service
+    hostname: warehouse-service
+    container_name: warehouse-service
+    volumes:
+      - ./warehouse-service/build/libs:/usr/src/service
+    working_dir: /usr/src/service
+    command: java -jar warehouse-service-0.0.1-SNAPSHOT.jar --spring.profiles.active=docker -Xmx300m
+    ports:
+      - 8184:8184
+    deploy:
+      resources:
+        limits:
+          cpus: 0.50
+          memory: 512M

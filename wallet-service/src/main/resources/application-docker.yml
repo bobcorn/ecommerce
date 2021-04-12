@@ -1,0 +1,17 @@
+logging:
+  level:
+    it.polito.ap.walletservice: DEBUG
+
+server:
+  port: 8183
+
+spring:
+  application:
+    name: wallet-service
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/WalletDB
+  kafka:
+    bootstrap-servers: broker:9092
+    consumer:
+      auto-offset-reset: earliest

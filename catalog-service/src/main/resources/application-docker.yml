@@ -1,0 +1,26 @@
+application:
+  order-address: http://order-service:8182/orders
+  wallet-address: http://wallet-service:8183/wallets
+
+logging:
+  level:
+    it.polito.ap.catalogservice: DEBUG
+
+server:
+  port: 8181
+
+spring:
+  application:
+    name: catalog-service
+  cache:
+    cache-names: "product"
+    caffeine:
+      spec: expireAfterWrite=300s
+    type: caffeine
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/CatalogDB
+  kafka:
+    bootstrap-servers: broker:9092
+    consumer:
+      auto-offset-reset: earliest

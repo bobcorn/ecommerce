@@ -1,0 +1,23 @@
+application:
+  catalog-address: http://catalog-service:8181/products
+  warehouse-address: http://warehouse-service:8184/warehouses
+  wallet-address: http://wallet-service:8183/wallets
+  consistency-check-timeout-ms: 30000
+
+logging:
+  level:
+    it.polito.ap.orderservice: DEBUG
+
+server:
+  port: 8182
+
+spring:
+  application:
+    name: order-service
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/OrderDB
+  kafka:
+    bootstrap-servers: broker:9092
+    consumer:
+      auto-offset-reset: earliest

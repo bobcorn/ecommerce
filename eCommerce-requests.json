@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "b63ee0e0-a260-4ded-9a89-2740785ddeb1",
+		"name": "eCommerce requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "catalog-service",
+			"item": [
+				{
+					"name": "Place order",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "$2a$10$J2jJnHyVeRb9X.hpThjEWuYUQWEVsFUoOLKIDLVAGSwrO1IDFKyHa",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "m.rossini@yopmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n        {\r\n            \"productDTO\":{\"productId\": \"prod1\"},\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"productDTO\":{\"productId\": \"prod2\"},\r\n            \"quantity\": 1\r\n        } \r\n    ]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8181/products/placeOrder?shippingAddress=shippingAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"products",
+								"placeOrder"
+							],
+							"query": [
+								{
+									"key": "shippingAddress",
+									"value": "shippingAddress"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "m.rossini@yopmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"1\",\r\n    \"quantity\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8181/products/orderStatus/6072c9a561b4451318a33bd2",
+							"host": [
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"products",
+								"orderStatus",
+								"6072c9a561b4451318a33bd2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change order status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "m.rossini@yopmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8181/products/order/6072c9a561b4451318a33bd2?newStatus=CANCELLED",
+							"host": [
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"products",
+								"order",
+								"6072c9a561b4451318a33bd2"
+							],
+							"query": [
+								{
+									"key": "newStatus",
+									"value": "CANCELLED"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order-service",
+			"item": []
+		},
+		{
+			"name": "warehouse-service",
+			"item": [
+				{
+					"name": "Create product in a warehouse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"prod12\",\r\n    \"quantity\": 23,\r\n    \"alarmThreshold\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8184/warehouses/111111111111111111111111",
+							"host": [
+								"localhost"
+							],
+							"port": "8184",
+							"path": [
+								"warehouses",
+								"111111111111111111111111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change product quantity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"prod12\",\r\n    \"quantity\": 24,\r\n    \"alarmThreshold\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8184/warehouses/111111111111111111111111/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8184",
+							"path": [
+								"warehouses",
+								"111111111111111111111111",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change product alarm",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"prod12\",\r\n    \"quantity\": 24,\r\n    \"alarmThreshold\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8184/warehouses/111111111111111111111111/alarm",
+							"host": [
+								"localhost"
+							],
+							"port": "8184",
+							"path": [
+								"warehouses",
+								"111111111111111111111111",
+								"alarm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get warehouse inventory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8184/warehouses/222222222222222222222222/",
+							"host": [
+								"localhost"
+							],
+							"port": "8184",
+							"path": [
+								"warehouses",
+								"222222222222222222222222",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wallet-service",
+			"item": [
+				{
+					"name": "Add funds to user wallet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"issuerId\": \"433333333333333333333334\",\r\n    \"amount\": 69420,\r\n    \"transactionMotivation\": \"ADMIN_RECHARGE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8183/wallets/333333333333333333333333/transactions/",
+							"host": [
+								"localhost"
+							],
+							"port": "8183",
+							"path": [
+								"wallets",
+								"333333333333333333333333",
+								"transactions",
+								""
+							]
+						},
+						"description": "Add funds to a user's wallet"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

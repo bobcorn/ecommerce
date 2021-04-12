@@ -1,0 +1,36 @@
+application:
+  catalog-address: http://localhost:8181/products
+  warehouse-address: http://localhost:8184/warehouses
+  wallet-address: http://localhost:8183/wallets
+  consistency-check-timeout-ms: 30000
+
+spring:
+  application:
+    name: order-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ap.warehouse.service@gmail.com # ap.order.service@gmail.com
+    password: Warehouse1
+    protocol: smtp
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
+
+
+logging:
+  level:
+    it.polito.ap.orderservice: DEBUG
+
+server:
+  port: 8182

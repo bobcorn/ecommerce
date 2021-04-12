@@ -1,0 +1,37 @@
+logging:
+  level:
+    it.polito.ap.warehouseservice: DEBUG
+
+server:
+  port: 8184
+
+spring:
+  application:
+    name: warehouse-service
+  cache:
+    cache-names: "warehouse"
+    caffeine:
+      spec: expireAfterWrite=60s
+    type: caffeine
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/WarehouseDB
+  kafka:
+    bootstrap-servers: broker:9092
+    consumer:
+      auto-offset-reset: earliest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ap.warehouse.service@gmail.com
+    password: Warehouse1
+    protocol: smtp
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true

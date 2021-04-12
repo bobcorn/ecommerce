@@ -1,0 +1,23 @@
+application:
+  order-address: http://localhost:8182/orders
+  wallet-address: http://localhost:8183/wallets
+
+spring:
+  application:
+    name: catalog-service
+  cache:
+    cache-names: "product"
+    caffeine:
+      spec: expireAfterWrite=300s
+    type: caffeine
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+
+logging:
+  level:
+    it.polito.ap.catalogservice: DEBUG
+
+server:
+  port: 8181

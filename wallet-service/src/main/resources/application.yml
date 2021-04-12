@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: wallet-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+
+logging:
+  level:
+    it.polito.ap.walletservice: DEBUG
+
+server:
+  port: 8183
