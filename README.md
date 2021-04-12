@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://git-softeng.polito.it/master/group-04/ecommerce">
-    <img src="https://git-softeng.polito.it/master/group-04/ecommerce/-/raw/master/docs/images/ecommerce_logo.png" alt="Logo" width="600" height="80">
+    <img src="https://github.com/bobcorn/ecommerce/blob/master/docs/images/ecommerce_logo.png" alt="Logo" width="600" height="80">
   </a>
 
 <h3 align="center">eCommerce</h3>
@@ -28,7 +28,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#installation-windows">Installation (Windows)</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
