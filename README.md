@@ -127,4 +127,4 @@ Released under the MIT License (see `LICENSE.md` for more information).
 * Marco Rossini\
   [s291482@studenti.polito.it](mailto:s291482@studenti.polito.it)
 
-Project Link: [https://git-softeng.polito.it/master/group-04/ecommerce](https://github.com/bobcorn/ecommerce)
+Project Link: [https://github.com/bobcorn/ecommerce](https://github.com/bobcorn/ecommerce)
