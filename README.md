@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://git-softeng.polito.it/master/group-04/ecommerce">
+  <a href="https://github.com/bobcorn/ecommerce">
     <img src="https://github.com/bobcorn/ecommerce/blob/master/docs/images/ecommerce_logo.png" alt="Logo" width="600" height="80">
   </a>
 
@@ -10,7 +10,7 @@
   <p align="center">
     A headless e-commerce web application
     <br />
-    <a href="https://git-softeng.polito.it/master/group-04/ecommerce/-/blob/master/docs/Report.pdf"><strong>Read the report »</strong></a>
+    <a href="https://github.com/bobcorn/ecommerce/blob/master/docs/Report.pdf"><strong>Read the report »</strong></a>
   </p>
 </p>
 
@@ -127,4 +127,4 @@ Released under the MIT License (see `LICENSE.md` for more information).
 * Marco Rossini\
   [s291482@studenti.polito.it](mailto:s291482@studenti.polito.it)
 
-Project Link: [https://git-softeng.polito.it/master/group-04/ecommerce](https://git-softeng.polito.it/master/group-04/ecommerce)
+Project Link: [https://git-softeng.polito.it/master/group-04/ecommerce](https://github.com/bobcorn/ecommerce)
