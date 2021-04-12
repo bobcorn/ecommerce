@@ -72,15 +72,15 @@ refer to the [Docker documentation](https://docs.docker.com/get-docker/) for ins
 ### Installation (Windows)
 
 1. Clone the repository:
-   ```powershell
+   ```bash
    git clone https://github.com/bobcorn/ecommerce.git
    ```
 2. Build the `.jar` files for the microservices:
-   ```powershell
+   ```bash
    docker-compose -f .\docker-compose-build.yml up --remove-orphans
    ```
 3. Deploy the microservices:
-   ```powershell
+   ```bash
    docker-compose -p ecommerce -f .\docker-compose.yml up -d --remove-orphans
    ```
 
